@@ -7,7 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
-  NumberTriviaModel tNumberTriviaModel = const NumberTriviaModel(text: 'Test text', number: 1);
+  NumberTriviaModel tNumberTriviaModel =
+      const NumberTriviaModel(text: 'Test Text', number: 1);
 
   test('should be a subclass of NumberTrivia entity', () async {
     expect(tNumberTriviaModel, isA<NumberTrivia>());
@@ -23,13 +24,24 @@ void main() {
       expect(result, tNumberTriviaModel);
     });
 
-    test('should return a valid model when the JSON number is regarded as a double',
+    test(
+        'should return a valid model when the JSON number is regarded as a double',
         () async {
-      final Map<String, dynamic> jsonMap = json.decode(fixture('trivia_double.json'));
+      final Map<String, dynamic> jsonMap =
+          json.decode(fixture('trivia_double.json'));
 
       final result = NumberTriviaModel.fromJson(jsonMap);
 
       expect(result, tNumberTriviaModel);
     });
+  });
+
+  group('toJson', () {
+    test('should return a JSON map containing the proper data', () async {
+      final result = tNumberTriviaModel.toJson();
+      final expectedMap = {"text": "Test Text", "number": 1};
+      expect(result, expectedMap);
+    });
+    
   });
 }
