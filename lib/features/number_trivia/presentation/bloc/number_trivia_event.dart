@@ -4,17 +4,17 @@ abstract class NumberTriviaEvent extends Equatable {
   const NumberTriviaEvent();
 }
 
-class GetTriviaForConcreteNumber extends NumberTriviaEvent {
+class GetTriviaForConcreteNumberEvent extends NumberTriviaEvent {
   final String numberString;
 
-  GetTriviaForConcreteNumber(this.numberString);
+  const GetTriviaForConcreteNumberEvent(this.numberString);
 
   @override
   List<Object?> get props => [numberString]; 
 }
 
-class GetTriviaForRandomNumber extends NumberTriviaEvent {
-  GetTriviaForRandomNumber();
+class GetTriviaForRandomNumberEvent extends NumberTriviaEvent {
+  const GetTriviaForRandomNumberEvent();
 
   @override
   List<Object?> get props => []; 
