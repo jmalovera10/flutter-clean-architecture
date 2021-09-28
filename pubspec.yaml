@@ -57,6 +57,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
   mockito: ^5.0.16
+  mocktail: ^0.1.4
   build_runner: ^2.1.2
 
 # For information on the generic Dart part of this file, see the

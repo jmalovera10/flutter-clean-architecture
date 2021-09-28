@@ -1,4 +1,4 @@
-# flutter_application_1
+# Flutter Clean Architecture
 
 A new Flutter project.
 
@@ -22,3 +22,7 @@ To test the application you can use the VSCode tool for Flutter or execute the V
 ```bash
 flutter pub run build_runner build
 ```
+
+## Insights
+
+- In some cases testing could be done with [mocktail](https://pub.dev/packages/mocktail) package since it is a wrapper of [mockito](https://pub.dev/packages/mockito) that works with Dart 2.0.^ and allows the usage of null safety features without breaking the testing code.
