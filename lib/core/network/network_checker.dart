@@ -6,7 +6,7 @@ abstract class NetworkChecker {
   Future<bool> get hasConnection;
 }
 
-@LazySingleton(as: NetworkChecker, env: [Environment.prod])
+@LazySingleton(as: NetworkChecker)
 class NetworkCheckerImpl extends NetworkChecker {
   @override
   Future<bool> get hasConnection async {
