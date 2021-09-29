@@ -29,7 +29,7 @@ void main() {
     mockGetRandomNumberTrivia = MockGetRandomNumberTrivia();
     mockInputConverter = MockInputConverter();
 
-    bloc = NumberTriviaBloc(Empty(),
+    bloc = NumberTriviaBloc(
         concrete: mockGetConcreteNumberTrivia,
         random: mockGetRandomNumberTrivia,
         inputConverter: mockInputConverter);

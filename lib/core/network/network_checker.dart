@@ -2,8 +2,13 @@ import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 
-@LazySingleton()
-class NetworkChecker {
+abstract class NetworkChecker {
+  Future<bool> get hasConnection;
+}
+
+@LazySingleton(as: NetworkChecker, env: [Environment.prod])
+class NetworkCheckerImpl extends NetworkChecker {
+  @override
   Future<bool> get hasConnection async {
     try {
       final result = await InternetAddress.lookup('example.com');

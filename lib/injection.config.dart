@@ -25,15 +25,18 @@ import 'features/number_trivia/domain/usecases/get_concrete_number_trivia.dart'
 import 'features/number_trivia/domain/usecases/get_random_number_trivia.dart'
     as _i13;
 import 'features/number_trivia/presentation/bloc/number_trivia_bloc.dart'
-    as _i14; // ignore_for_file: unnecessary_lambdas
+    as _i14;
 
+const String _prod = 'prod';
+// ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
 _i1.GetIt $initGetIt(_i1.GetIt get,
     {String? environment, _i2.EnvironmentFilter? environmentFilter}) {
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   gh.lazySingleton<_i3.InputConverter>(() => _i3.InputConverter());
-  gh.lazySingleton<_i4.NetworkChecker>(() => _i4.NetworkChecker());
+  gh.lazySingleton<_i4.NetworkChecker>(() => _i4.NetworkCheckerImpl(),
+      registerFor: {_prod});
   gh.lazySingleton<_i5.NetworkInfo>(
       () => _i5.NetworkInfoImpl(get<_i4.NetworkChecker>()));
   gh.lazySingleton<_i6.NumberTriviaLocalDataSource>(() =>
@@ -51,7 +54,6 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i13.GetRandomNumberTrivia>(
       () => _i13.GetRandomNumberTrivia(get<_i10.NumberTriviaRepository>()));
   gh.factory<_i14.NumberTriviaBloc>(() => _i14.NumberTriviaBloc(
-      get<_i14.NumberTriviaState>(),
       concrete: get<_i12.GetConcreteNumberTrivia>(),
       random: get<_i13.GetRandomNumberTrivia>(),
       inputConverter: get<_i3.InputConverter>()));

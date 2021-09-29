@@ -23,11 +23,11 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   final GetRandomNumberTrivia random;
   final InputConverter inputConverter;
 
-  NumberTriviaBloc(NumberTriviaState initialState,
+  NumberTriviaBloc(
       {required this.concrete,
       required this.random,
       required this.inputConverter})
-      : super(initialState) {
+      : super(Empty()) {
     on<GetTriviaForConcreteNumberEvent>((event, emit) {
       final inputEither =
           inputConverter.stringToUnsignedInteger(event.numberString);
