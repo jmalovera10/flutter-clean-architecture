@@ -17,13 +17,19 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-## Testing
+## Generating Code
 
-To test the application you can use the VSCode tool for Flutter or execute the VSCode command `Dart: Run all tests` after running `ctrl + shift + p`. To generate a mocking class using Mockito `@GenerateMocks` annotation you can execute in your terminal
+To generate a mocking class using Mockito `@GenerateMocks` annotation you and to genereate dependency injection configurations can execute in your terminal
 
 ```bash
-flutter pub run build_runner build
+flutter pub run build_runner watch --delete-conflicting-outputs
 ```
+
+Bear in mind that the `watch` flag will be waiting and updating on the changes you make in your code. If you don't want this behaviour you can remove that flag.
+
+## Testing
+
+To test the application you can use the VSCode tool for Flutter or execute the VSCode command `Dart: Run all tests` after running `ctrl + shift + p`.
 
 ## Insights
 

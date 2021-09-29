@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_application_1/core/error/exception.dart';
 import 'package:flutter_application_1/features/number_trivia/data/models/number_trivia_model.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class NumberTriviaLocalDataSource {
@@ -16,6 +17,7 @@ abstract class NumberTriviaLocalDataSource {
 
 const CACHED_NUMBER_TRIVIA = 'CACHED_NUMBER_TRIVIA';
 
+@LazySingleton(as: NumberTriviaLocalDataSource)
 class NumberTriviaLocalDataSourceImpl implements NumberTriviaLocalDataSource {
   final SharedPreferences sharedPreferences;
 

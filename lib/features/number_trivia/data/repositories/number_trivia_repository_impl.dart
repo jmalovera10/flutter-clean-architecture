@@ -7,9 +7,11 @@ import 'package:flutter_application_1/features/number_trivia/domain/entities/num
 import 'package:flutter_application_1/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_application_1/features/number_trivia/domain/repositories/number_trivia_repository.dart';
+import 'package:injectable/injectable.dart';
 
 typedef _ConcreteOrRandomChooser = Future<NumberTriviaModel> Function();
 
+@LazySingleton(as: NumberTriviaRepository)
 class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   final NumberTriviaRemoteDataSource remoteDataSource;
   final NumberTriviaLocalDataSource localDataSource;

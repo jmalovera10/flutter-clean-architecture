@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:injectable/injectable.dart';
+
+@LazySingleton()
 class NetworkChecker {
   Future<bool> get hasConnection async {
     try {
