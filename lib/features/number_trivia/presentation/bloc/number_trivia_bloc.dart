@@ -28,30 +28,32 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
       required this.random,
       required this.inputConverter})
       : super(Empty()) {
-    on<GetTriviaForConcreteNumberEvent>((event, emit) {
+    on<GetTriviaForConcreteNumberEvent>((event, emit) async {
       final inputEither =
           inputConverter.stringToUnsignedInteger(event.numberString);
 
-      inputEither.fold((failure) {
-        emit(const Error(message: INVALID_INPUT_FAILURE_MESSAGE));
-      }, (integer) async {
+      final stateResult = await inputEither.fold(
+          (failure) async =>
+              Future(() => const Error(message: INVALID_INPUT_FAILURE_MESSAGE)),
+          (integer) async {
         emit(Loading());
         final failureOrTrivia = await concrete(Params(number: integer));
-        _eitherLoadedOrErrorState(emit, failureOrTrivia);
+        return _eitherLoadedOrErrorState(failureOrTrivia);
       });
+      emit(stateResult);
     });
 
     on<GetTriviaForRandomNumberEvent>((event, emit) async {
       emit(Loading());
       final failureOrTrivia = await random(NoParams());
-      _eitherLoadedOrErrorState(emit, failureOrTrivia);
+      emit(_eitherLoadedOrErrorState(failureOrTrivia));
     });
   }
 
-  void _eitherLoadedOrErrorState(Emitter<NumberTriviaState> emit, Either<Failure, NumberTrivia> failureOrTrivia) {
-    emit(failureOrTrivia.fold(
+  _eitherLoadedOrErrorState(Either<Failure, NumberTrivia> failureOrTrivia) {
+    return failureOrTrivia.fold(
         (failure) => Error(message: _mapFailureToMessage(failure)),
-        (trivia) => Loaded(trivia: trivia)));
+        (trivia) => Loaded(trivia: trivia));
   }
 
   String _mapFailureToMessage(Failure failure) {
